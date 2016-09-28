@@ -76,6 +76,9 @@ figure {
 
 .fh5co-cover,
 .fh5co-hero {
+ -webkit-background-size: cover;
+  -moz-background-size: cover;
+	background-size: cover;	
   position: relative;
   height: 800px;
 }
@@ -144,7 +147,7 @@ figure {
   position: absolute;
   width: 100%;
   margin-top: -100px;
-  z-index: 2;
+  z-index: 6;
   color: #fff;
 }
 @media screen and (max-width: 768px) {
@@ -1094,7 +1097,7 @@ figure {
   transition: 0.3s;
 }
 .btn.btn-primary {
-  background: #4CB648;
+  background: #910907;
   color: #fff;
   border: none !important;
   border: 2px solid transparent !important;
