@@ -76,26 +76,11 @@ figure {
 
 .fh5co-cover,
 .fh5co-hero {
- 
- /*-webkit-background-size: cover;
+ -webkit-background-size: cover;
   -moz-background-size: cover;
 	background-size: cover;	
   position: relative;
   height: 800px;
-  */
-  position: relative;
-  width: 100%;
-  min-height: auto;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  background-size: cover;
-  -o-background-size: cover;
-  background-position: center;
-  text-align: center;
-  color: white;
-   height: 800px;
-  
-  
 }
 @media screen and (max-width: 768px) {
   .fh5co-cover,
