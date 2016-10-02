@@ -105,6 +105,33 @@ var SampleApp = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html') );
         };
+		
+		  self.routes['/contact'] = function(req, res) {
+
+            res.setHeader('Content-Type', 'text/html');
+            res.send(fs.readFileSync('views/contact.html'));
+        };
+		 self.routes['/about'] = function(req, res) {
+
+
+            res.setHeader('Content-Type', 'text/html');
+            res.send(fs.readFileSync('views/about.html'));
+        };
+		
+		self.routes['/testimonials'] = function(req, res) {
+
+ 
+            res.setHeader('Content-Type', 'text/html');
+            res.send(fs.readFileSync('views/t.html'));
+        };
+		 self.routes['/trainer-videos'] = function(req, res) {
+
+
+            res.setHeader('Content-Type', 'text/html');
+            res.send(fs.readFileSync('views/videos.html'));
+        };
+		
+		
     };
 
 
