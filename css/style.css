@@ -83,6 +83,7 @@ figure {
   position: relative;
   height: 800px;
   */
+  /*
   position: relative;
   width: 100%;
   min-height: auto;
@@ -93,7 +94,22 @@ figure {
   background-position: center;
   text-align: center;
   color: white;
-   height: 800px;
+  
+   */
+   
+	background: url('../images/home-image.jpg') no-repeat center center scroll;
+    height: 800px;
+    color: white;
+	position: relative;
+    width: 100%;
+    min-height: auto;
+   -webkit-background-size: cover;
+   -moz-background-size: cover;
+    background-size: cover;
+   -o-background-size: cover;
+   background-position: center;
+   text-align: center;
+   color: white;
   
   
 }
