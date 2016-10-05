@@ -355,6 +355,7 @@ figure {
 #fh5co-logo a {
   position: relative;
 }
+
 #fh5co-logo a:after {
   position: absolute;
   content: '';
