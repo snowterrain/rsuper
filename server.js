@@ -3,6 +3,10 @@
 var express = require('express');
 var fs      = require('fs');
 var mustache = require('mustache');
+var nodemailer = require('nodemailer');
+var request = require('request');
+var app=express();
+
 
 
 /**
@@ -106,16 +110,28 @@ var SampleApp = function() {
             res.send(self.cache_get('index.html') );
         };
 		
-		  self.routes['/contact'] = function(req, res) {
-
-            res.setHeader('Content-Type', 'text/html');
-            res.send(fs.readFileSync('views/contact.html'));
+       self.routes['/contact'] = function(req, res) {
+           
+          var content = fs.readFileSync('views/contact.html').toString();
+	  var data ={
+						"message":""
+						}
+	  var html = mustache.to_html(content,data);
+	  res.send(html);
+	    
         };
 		 self.routes['/about'] = function(req, res) {
 
 
             res.setHeader('Content-Type', 'text/html');
             res.send(fs.readFileSync('views/about.html'));
+        };
+	
+	 self.routes['/subscribe'] = function(req, res) {
+
+
+            res.setHeader('Content-Type', 'text/html');
+            res.send(fs.readFileSync('views/newsletter.html'));
         };
 		
 		self.routes['/testimonials'] = function(req, res) {
@@ -130,7 +146,59 @@ var SampleApp = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send(fs.readFileSync('views/videos.html'));
         };
+	
+self.routes['/sendMail'] = function(req, res) {
+	
+	 
+	    
+	      var content = fs.readFileSync('views/contact.html').toString();
+			var transporter = nodemailer.createTransport({
+			service: 'Gmail',
+			auth: {
+            user: 'gpavan99@gmail.com', // Your email id
+            pass: 'pavan700' // Your password
+		  }
+		  
+		 
+			
+			
 		
+			});
+			
+			 var text ="This Message From:   "+req.query.name+' Phone :'+req.query.phone+"      Email:"+req.query.email+"      "+req.query.message;
+			 console.log('hello Name '+req.query.name+' Phone :'+req.query.phone+'  Email'+req.query.email+'Message'+req.query.message);
+//			 'Hello world from \n\n';
+		  var mailOptions = {
+			from: req.query.email, // sender address
+			to: 'gpavan99@gmail.com,rashidc@hotmail.com', // list of receivers
+			subject: 'Superfit Website Inquiry', // Subject line
+			text: text //, // plaintext body
+			// html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
+			};
+			
+			
+			transporter.sendMail(mailOptions, function(error, info){
+					if(error){
+						console.log(error);
+						//res.json({yo: 'error'});
+						var data ={
+						"message":"Failed"
+						}
+						 var html = mustache.to_html(content,data);
+						res.send(html);
+					}else{
+						console.log('Message sent: ' + info.response);
+						var data ={
+						"message":"Thank you for getting in touch!. Rashid will get back to you as soon as possible"
+						}
+						//res.json({yo: info.response});
+						 var html = mustache.to_html(content,data);
+						res.send(html);
+					};
+			});
+		
+        };
+	
 		
     };
 

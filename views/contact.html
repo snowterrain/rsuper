@@ -97,6 +97,7 @@
 									<li><a href="/trainer-videos">Training Videos</a></li>
 								<li><a href="/about">About</a></li>
 								<li class="active"><a href="/contact">Contact</a></li>
+								<li><a href="/subscribe">Subscribe</a></li>
 							</ul>
 							
 							
@@ -116,13 +117,27 @@
 							<p>Super Fit By Rashid Chaudry</a></p>
 						</div>
 					</div>
-				</div>
+					
 			</div>
+			
 		</div><!-- end: fh5co-parallax -->
 		<!-- end:fh5co-hero -->
+		
+		
+	
+		
 		<div id="fh5co-contact">
 			<div class="container">
-				<form action="#">
+			
+			
+					
+				<form action="/sendMail" method="GET">
+				
+				<div class="row">
+						<div class="col-md-12 animate-box text-center">
+						{{message}} <br><br>
+						</div>
+				</div>
 					<div class="row">
 						<div class="col-md-6 animate-box">
 							<h3 class="section-title">Rashid Chaudry</h3>
@@ -135,20 +150,34 @@
 							</ul>
 						</div>
 						<div class="col-md-6 animate-box">
+						
+						
 							<div class="row">
+							
+							
 								<div class="col-md-6">
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Name">
+										<input type="name" class="form-control" placeholder="Name" id="name" name="name">
 									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">
-										<input type="text" class="form-control" placeholder="Email">
+										<input type="email" class="form-control" placeholder="Email" id="email" name="email"> 
 									</div>
+									
+									
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+										<input type="phone" class="form-control" placeholder="Phone" id="phone" name="phone"> 
+									</div>
+									
+									
+									
 								</div>
 								<div class="col-md-12">
 									<div class="form-group">
-										<textarea name="" class="form-control" id="" cols="30" rows="7" placeholder="Message"></textarea>
+										<textarea name="message" id="message" class="form-control" id="" cols="30" rows="7" placeholder="Message"></textarea>
 									</div>
 								</div>
 								<div class="col-md-12">
@@ -163,7 +192,7 @@
 			</div>
 		</div>
 		<!-- END fh5co-contact -->
-		<div id="map" class="fh5co-map"></div>
+		
 		<!-- END map -->
 		<footer>
 			<div id="footer">
@@ -184,9 +213,15 @@
 							</ul>
 						</div>
 						<div class="col-md-4 animate-box">
-							<h3 class="section-title">Drop us a line</h3>
-							<form class="contact-form">
-								<div class="form-group">
+						
+						
+						
+						
+							<class="section-title">
+							<form class="contact-form" action="/subscribe">
+							
+							
+								<!--div class="form-group">
 									<label for="name" class="sr-only">Name</label>
 									<input type="name" class="form-control" id="name" placeholder="Name">
 								</div>
@@ -199,8 +234,13 @@
 									<textarea class="form-control" id="message" rows="7" placeholder="Message"></textarea>
 								</div>
 								<div class="form-group">
-									<input type="submit" id="btn-submit" class="btn btn-send-message btn-md" value="Send Message">
+									
+								</div-->
+								<div class="form-group">
+								<input type="submit" id="btn-submit" class="btn btn-send-message btn-md" value="Subscribe for News Letter">
+									
 								</div>
+								
 							</form>
 						</div>
 					</div>
