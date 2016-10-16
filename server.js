@@ -149,29 +149,25 @@ var SampleApp = function() {
 	
 self.routes['/sendMail'] = function(req, res) {
 	
-	 
+	 var content = fs.readFileSync('views/contact.html').toString()
 	    
-	      var content = fs.readFileSync('views/contact.html').toString();
-			var transporter = nodemailer.createTransport({
-			service: 'Gmail',
-			auth: {
-            user: 'gpavan99@gmail.com', // Your email id
-            pass: 'pavan700' // Your password
-		  }
-		  
-		 
+	   
 			
-			
-		
+				var transporter = nodemailer.createTransport({ 
+				host: 'smtpout.secureserver.net', 
+				port: 465, 
+				auth: { user: 'contact@the-superfit.com', pass: 'Superman39' },
+					secure: true
 			});
 			
 			 var text ="This Message From:   "+req.query.name+' Phone :'+req.query.phone+"      Email:"+req.query.email+"      "+req.query.message;
 			 console.log('hello Name '+req.query.name+' Phone :'+req.query.phone+'  Email'+req.query.email+'Message'+req.query.message);
 //			 'Hello world from \n\n';
 		  var mailOptions = {
-			from: req.query.email, // sender address
+			from:'contact@the-superfit.com',
+//			req.query.email, // sender address
 			to: 'gpavan99@gmail.com,rashidc@hotmail.com', // list of receivers
-			subject: 'Superfit Website Inquiry', // Subject line
+			subject: 'Superfit Website Inquiry By - '+ req.query.name, // Subject line
 			text: text //, // plaintext body
 			// html: '<b>Hello world ✔</b>' // You can choose to send an HTML body instead
 			};
