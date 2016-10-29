@@ -146,6 +146,52 @@ var SampleApp = function() {
             res.setHeader('Content-Type', 'text/html');
             res.send(fs.readFileSync('views/videos.html'));
         };
+		
+	 self.routes['/review'] = function(req, res) {
+           
+				var content = fs.readFileSync('views/treviews.html').toString();
+					var data ={
+						"message":""
+						}
+				var html = mustache.to_html(content,data);
+				res.send(html);
+	    
+        };
+		
+		
+		self.routes['/SubmitReview'] = function(req, res) {
+           
+		   console.log("Saving name "+req.query.fname+">>>ID>>>"+req.query.lname+">>>>>>>>>"+req.review);
+		   
+		   if(req.query.fname && req.query.lname && req.review){
+                self.mongoSave(req.query.fname,req.query.lname, req.review);
+            }
+				var content = fs.readFileSync('views/treviews.html').toString();
+					var data ={
+						"message":""
+						}
+				var html = mustache.to_html(content,data);
+				res.send(html);
+	    
+        };
+		
+		
+		
+		
+		    self.mongoSave = function(fname, lname, review) {
+				console.log("We are connected");
+				
+				console.log("In Mongo Save"+fname+">>>ID>>>"+lname+">>>>>>>>>"+review);
+				var collection = database.collection('testimonials');
+					collection.find().count(function(error, nbDocs) {
+					//var imgUrl = url;
+					//imgUrl = imgUrl.replace('http://youtube.com/embed/','http://img.youtube.com/vi/');
+					//imgUrl = imgUrl+'/0.jpg';
+					var document = {'fname':name, 'lname':url,'review':review};
+					collection.insert(document, {w:1}, function(err, result) {});
+        });
+    };
+		
 	
 self.routes['/sendMail'] = function(req, res) {
 	
@@ -221,9 +267,39 @@ self.routes['/sendMail'] = function(req, res) {
         self.setupVariables();
         self.populateCache();
         self.setupTerminationHandlers();
-
+		self.mongoConnect();
         // Create the express server and routes.
         self.initializeServer();
+    };
+	
+	
+	
+	    self.mongoConnect = function(){
+      //############################################################################
+      //  TODO: Remove duplicate mongo connect in both admin and server.js
+      //############################################################################
+
+        // Retrieve
+        var MongoClient = require('mongodb').MongoClient;
+
+        var connection_string = '127.0.0.1:27017/rsuperfit';
+        // if OPENSHIFT env variables are present, use the available connection info:
+        if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD){
+            connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+            process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+            process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+            process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+            process.env.OPENSHIFT_APP_NAME;
+        }
+        MongoClient.connect("mongodb://"+connection_string, function(err, db) {
+            if(!err) {
+                 db.authenticate('admin', 'JbLjxjD4NCH7', function(err, result) {
+                       database = db;
+                });
+
+            }
+    });
+
     };
 
 
