@@ -161,10 +161,10 @@ var SampleApp = function() {
 		
 		self.routes['/SubmitReview'] = function(req, res) {
            
-		   console.log("Saving name "+req.query.fname+">>>ID>>>"+req.query.lname+">>>>>>>>>"+req.review);
+		   console.log("Saving name "+req.query.fname+">>>ID>>>"+req.query.lname+">>>>>>>>>"+req.query.review);
 		   
-		   if(req.query.fname && req.query.lname && req.review){
-                self.mongoSave(req.query.fname,req.query.lname, req.review);
+		   if(req.query.fname && req.query.lname && req.query.review){
+                self.mongoSave(req.query.fname,req.query.lname, req.query.review);
             }
 				var content = fs.readFileSync('views/treviews.html').toString();
 					var data ={
