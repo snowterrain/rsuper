@@ -187,7 +187,7 @@ var SampleApp = function() {
 					//var imgUrl = url;
 					//imgUrl = imgUrl.replace('http://youtube.com/embed/','http://img.youtube.com/vi/');
 					//imgUrl = imgUrl+'/0.jpg';
-					var document = {'fname':name, 'lname':lname,'review':review};
+					var document = {'fname':fname, 'lname':lname,'review':review};
 					collection.insert(document, {w:1}, function(err, result) {});
         });
     };
