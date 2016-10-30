@@ -7,7 +7,7 @@ var nodemailer = require('nodemailer');
 var request = require('request');
 var app=express();
 
-
+var database;
 
 /**
  *  Define the sample application.
@@ -136,7 +136,30 @@ var SampleApp = function() {
 		
 		self.routes['/testimonials'] = function(req, res) {
 
- 
+			var params = {};
+		 	var collection = database.collection('testimonials');
+			 
+			
+			  collection.find(params).toArray(function(err, docs) {
+               var idx = 0;
+                var idex = 0;
+                var data = {
+                    "movies" : docs,
+                    "idx" : function(){
+                        return idx++;
+                    },
+                    "idex" : function(){
+                        return idex++;
+                    }
+                 };
+
+             })
+			 
+			 
+			 
+			 
+			 
+			
             res.setHeader('Content-Type', 'text/html');
             res.send(fs.readFileSync('views/t.html'));
         };
