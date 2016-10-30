@@ -6,6 +6,7 @@ var mustache = require('mustache');
 var nodemailer = require('nodemailer');
 var request = require('request');
 var app=express();
+var cheerio = require('cheerio');
 
 var database;
 
