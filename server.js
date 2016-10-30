@@ -173,10 +173,32 @@ var SampleApp = function() {
             //res.send(fs.readFileSync('views/t.html'));
         };
 		 self.routes['/trainer-videos'] = function(req, res) {
+			 
+			var params = {};
+		 	var collection = database.collection('trainingyt');
+			var content = fs.readFileSync('views/videos.html').toString();
 
+			collection.find(params).sort({"_id":-1}).toArray(function(err, docs) {
+               var idx = 0;
+                var idex = 0;
+                var data = {
+                    "videos" : docs,
+                    "idx" : function(){
+                        return idx++;
+                    },
+                    "idex" : function(){
+                        return idex++;
+                    }
+                 };
+				 
+				 
+			  var html = mustache.to_html(content,data);
+                   if(req.headers.type && req.headers.type == 'JSON'){
+                     html = data;
+                   }
+                   res.send(html);
 
-            res.setHeader('Content-Type', 'text/html');
-            res.send(fs.readFileSync('views/videos.html'));
+             })
         };
 		
 	 self.routes['/review'] = function(req, res) {
