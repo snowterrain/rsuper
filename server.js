@@ -209,12 +209,14 @@ var SampleApp = function() {
                         var youtubeid=href.substring(href.lastIndexOf("v=")+2,href.lastIndexOf("v=")+13);
                         //youtubeid=youtubeid.substring(0,youtubeid.lastIndexOf("&index"));
                         //linkContent = linkContent+ $(link).text() + ':' + youtubeid+ '<br>';
+						
+						 console.log("youtube id"+youtubeid);
                         if(youtubeid && text){
                           var document = {'name':text.replace('\n',''), 'youtubeid':youtubeid};
                           collection.insert(document, {w:1}, function(err, result) {});
                         }
                       }
-                       //console.log($(link).text() + ':\n  ' + $(link).attr('href'));
+                       console.log($(link).text() + ':\n  ' + $(link).attr('href'));
                      });
 
 
