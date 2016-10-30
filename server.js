@@ -196,7 +196,9 @@ var SampleApp = function() {
 
           //for(var i=0;i<configModule.getChannels().length;i++){
             var collection = database.collection('trainingyt');
-              request('https://www.youtube.com/channel/UCG7vl3IncjRSiLkhxtkB_4g', function (error, response, html) {
+              request('https://www.youtube.com/channel/UCG7vl3IncjRSiLkhxtkB_4g/videos?shelf_id=0&view=0&sort=dd', function (error, response, html) {
+				  
+
                     var $ = cheerio.load(html);
                     //var linkContent = ""
                     links = $('a');
