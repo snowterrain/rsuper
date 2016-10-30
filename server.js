@@ -193,7 +193,7 @@ var SampleApp = function() {
         var newHtml;
         try{
 
-          for(var i=0;i<configModule.getChannels().length;i++){
+          //for(var i=0;i<configModule.getChannels().length;i++){
             var collection = database.collection('trainingyt');
               request('https://www.youtube.com/channel/UCG7vl3IncjRSiLkhxtkB_4g', function (error, response, html) {
                     var $ = cheerio.load(html);
@@ -221,7 +221,7 @@ var SampleApp = function() {
 
               });
 
-          }
+         //}
            res.send('Done');
           }catch(e){
             res.send("error");
