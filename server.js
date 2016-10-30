@@ -138,13 +138,13 @@ var SampleApp = function() {
 
 			var params = {};
 		 	var collection = database.collection('testimonials');
-			 
+			 var content = fs.readFileSync('views/t.html').toString();
 			
 			  collection.find(params).toArray(function(err, docs) {
                var idx = 0;
                 var idex = 0;
                 var data = {
-                    "movies" : docs,
+                    "testimonials" : docs,
                     "idx" : function(){
                         return idx++;
                     },
@@ -155,13 +155,18 @@ var SampleApp = function() {
 
              })
 			 
+			  var html = mustache.to_html(content,data);
+                   if(req.headers.type && req.headers.type == 'JSON'){
+                     html = data;
+                   }
+                   res.send(html);
 			 
 			 
 			 
 			 
 			
-            res.setHeader('Content-Type', 'text/html');
-            res.send(fs.readFileSync('views/t.html'));
+           // res.setHeader('Content-Type', 'text/html');
+            //res.send(fs.readFileSync('views/t.html'));
         };
 		 self.routes['/trainer-videos'] = function(req, res) {
 
