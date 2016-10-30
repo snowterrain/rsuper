@@ -152,14 +152,17 @@ var SampleApp = function() {
                         return idex++;
                     }
                  };
-
-             })
-			 
-			  var html = mustache.to_html(content,data);
+				 
+				 
+				  var html = mustache.to_html(content,data);
                    if(req.headers.type && req.headers.type == 'JSON'){
                      html = data;
                    }
                    res.send(html);
+
+             })
+			 
+			 
 			 
 			 
 			 
