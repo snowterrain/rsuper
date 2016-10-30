@@ -195,9 +195,9 @@ var SampleApp = function() {
 		   console.log("Saving name "+req.query.fname+">>>ID>>>"+req.query.lname+">>>>>>>>>"+req.query.review);
 		   
 		   if(req.query.fname && req.query.lname && req.query.review){
-                self.mongoSave(req.query.fname,req.query.lname, req.query.review);
+                self.mongoSave(req.query.fname,req.query.lname, req.query.review,req.query.email,req.query.city,req.query.state);
             }
-				var content = fs.readFileSync('views/treviews.html').toString();
+				var content = fs.readFileSync('views/thanks.html').toString();
 					var data ={
 						"message":""
 						}
@@ -206,10 +206,10 @@ var SampleApp = function() {
 	    
         };
 		
+	
 		
 		
-		
-		    self.mongoSave = function(fname, lname, review) {
+		    self.mongoSave = function(fname, lname, review,email,city,state) {
 				console.log("We are connected");
 				
 				console.log("In Mongo Save"+fname+">>>ID>>>"+lname+">>>>>>>>>"+review);
@@ -218,7 +218,7 @@ var SampleApp = function() {
 					//var imgUrl = url;
 					//imgUrl = imgUrl.replace('http://youtube.com/embed/','http://img.youtube.com/vi/');
 					//imgUrl = imgUrl+'/0.jpg';
-					var document = {'fname':fname, 'lname':lname,'review':review};
+					var document = {'fname':fname, 'lname':lname,'review':review,'email':email,'city':city,'state':state};
 					collection.insert(document, {w:1}, function(err, result) {});
         });
     };
