@@ -189,6 +189,47 @@ var SampleApp = function() {
 	    
         };
 		
+    self.routes['/youtubeDataFeed'] = function(req, res) {
+        var newHtml;
+        try{
+
+          for(var i=0;i<configModule.getChannels().length;i++){
+            var collection = database.collection('trainingyt');
+              request('https://www.youtube.com/channel/UCG7vl3IncjRSiLkhxtkB_4g', function (error, response, html) {
+                    var $ = cheerio.load(html);
+                    //var linkContent = ""
+                    links = $('a');
+                     $(links).each(function(i, link){
+                      var href = $(link).attr('href');
+                      var text = $(link).text();
+                      text = text.replace(new RegExp('\n', 'g'), '')
+                      text = text.trim();
+                      if(href !=undefined && href.indexOf('watch') != -1){
+                        //linkContent = linkContent+ $(link).text() + ':' + href+ '<br>';
+                        var youtubeid=href.substring(href.lastIndexOf("v=")+2,href.lastIndexOf("v=")+13);
+                        //youtubeid=youtubeid.substring(0,youtubeid.lastIndexOf("&index"));
+                        //linkContent = linkContent+ $(link).text() + ':' + youtubeid+ '<br>';
+                        if(youtubeid && text){
+                          var document = {'name':text.replace('\n',''), 'youtubeid':youtubeid};
+                          collection.insert(document, {w:1}, function(err, result) {});
+                        }
+                      }
+                       //console.log($(link).text() + ':\n  ' + $(link).attr('href'));
+                     });
+
+
+
+              });
+
+          }
+           res.send('Done');
+          }catch(e){
+            res.send("error");
+          }
+    };
+		
+		
+		
 		
 		self.routes['/SubmitReview'] = function(req, res) {
            
