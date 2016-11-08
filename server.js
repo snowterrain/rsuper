@@ -236,6 +236,18 @@ var SampleApp = function() {
 	    
         };	
 			
+			
+		
+		 self.routes['/promotions'] = function(req, res) {
+           
+				var content = fs.readFileSync('views/promotions.html').toString();
+					var data ={
+						"message":""
+						}
+				var html = mustache.to_html(content,data);
+				res.send(html);
+	    
+        };		
 		
     self.routes['/youtubeDataFeed'] = function(req, res) {
         var newHtml;
