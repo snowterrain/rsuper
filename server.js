@@ -172,6 +172,44 @@ var SampleApp = function() {
            // res.setHeader('Content-Type', 'text/html');
             //res.send(fs.readFileSync('views/t.html'));
         };
+
+
+        self.routes['/getClients'] = function(req, res) {
+
+            var params = {};
+            var collection = database.collection('client');
+           
+            
+              collection.find(params).toArray(function(err, docs) {
+               var idx = 0;
+                var idex = 0;
+                var data = {
+                    "clients" : docs,
+                    "idx" : function(){
+                        return idx++;
+                    },
+                    "idex" : function(){
+                        return idex++;
+                    }
+                 };
+                 
+                             
+                   res.send(data);
+
+             })
+             
+             
+             
+             
+             
+             
+            
+           // res.setHeader('Content-Type', 'text/html');
+            //res.send(fs.readFileSync('views/t.html'));
+        };
+
+
+
 		 self.routes['/trainer-videos'] = function(req, res) {
 			 
 			var params = {};
