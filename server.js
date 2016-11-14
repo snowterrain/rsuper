@@ -193,7 +193,10 @@ var SampleApp = function() {
                     }
                  };
                  
-                             
+                     res.header("Access-Control-Allow-Origin", "*");
+                     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+           
+
                    res.send(data);
 
              })
