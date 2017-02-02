@@ -55,6 +55,43 @@
 	<link rel="stylesheet" href="../css/superfish.css">
 
 	<link rel="stylesheet" href="../css/style.css">
+	
+	<style>
+	.blink_me {
+    -webkit-animation-name: blinker;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+
+    -moz-animation-name: blinker;
+    -moz-animation-duration: 1s;
+    -moz-animation-timing-function: linear;
+    -moz-animation-iteration-count: infinite;
+
+    animation-name: blinker;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@-moz-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@-webkit-keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+
+@keyframes blinker {  
+    0% { opacity: 1.0; }
+    50% { opacity: 0.0; }
+    100% { opacity: 1.0; }
+}
+	</style>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -111,6 +148,7 @@
 					<div class="col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 text-center fh5co-table">
 						<div class="fh5co-intro fh5co-table-cell animate-box">
 							<h1 class="text-center">Promotions</h1>
+							
 						
 						</div>
 					</div>
@@ -124,6 +162,8 @@
 					<div class="col-md-8 col-md-offset-2">
 						<div class="heading-section text-center animate-box">
 							<h2>Pricing</h2>
+							
+							<h2 style="color:RED;text"><span class="blink_me">Introducing small Group Training program</span></h2>
 							<p></p>
 						</div>
 					</div>
@@ -131,7 +171,8 @@
 				<div class="row animate-box">
 					<div class="col-md-10 col-md-offset-1 text-center">
 						<ul class="schedule">
-							<li><a href="#" class="active" data-sched="sunday">New Client</a></li>
+						<li><a href="#" class="active" data-sched="saturday">Group Training</a></li>
+							<li><a href="#" data-sched="sunday">New Client</a></li>
 							<li><a href="#" data-sched="monday">Student</a></li>
 							<li><a href="#" data-sched="tuesday">Standard</a></li>
 							
@@ -141,9 +182,36 @@
 
 						<div class="col-md-12 schedule-container">
 
-						
+							<div class="schedule-content active" data-day="saturday">
+								
 
-							<div class="schedule-content active" data-day="sunday">
+								<div class="col-md-4 col-sm-6">
+									<div class="program program-schedule">
+																	
+										
+										
+										<h3>session $30.00</h3>
+										<span>Group of 3</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-6">
+									<div class="program program-schedule">
+										
+										<h3>Session $20.00 </h3>
+										<span>Group of 4</span>
+									</div>
+								</div>
+								<div class="col-md-4 col-sm-6">
+									<div class="program program-schedule">
+										
+										<h3>Session $19.00</h3>
+										<span>Group of 4</span>
+									</div>
+								</div>
+								
+							</div>
+
+							<div class="schedule-content" data-day="sunday">
 								
 								<div class="col-md-3 col-sm-6">
 									<div class="program program-schedule">
