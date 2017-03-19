@@ -8,7 +8,31 @@ var request = require('request');
 var app=express();
 var cheerio = require('cheerio');
 
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
+ 
+// create application/x-www-form-urlencoded parser 
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
+
+var mongo = require('mongodb');
+
+
+ 
+
 var database;
+
+
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+    
+
+
+app.use(express.json());
+app.use(express.urlencoded());
 
 /**
  *  Define the sample application.
@@ -210,6 +234,51 @@ var SampleApp = function() {
            // res.setHeader('Content-Type', 'text/html');
             //res.send(fs.readFileSync('views/t.html'));
         };
+
+        self.routes['/getClientActivity'] = function(req, res) {
+
+            
+            // var params = {};
+                 console.log("In client activity ID >>>>>>>>>>>>"+req.query.id);
+
+                 var o_id = new mongo.ObjectID(req.query.id);
+
+            var params = {"_id":o_id};
+
+
+
+            var collection = database.collection('client');
+
+           
+            console.log("In client activity");
+              collection.find(params).toArray(function(err, docs) {
+               var idx = 0;
+                var idex = 0;
+                var data = {
+                    "clients" : docs,
+                    "idx" : function(){
+                        return idx++;
+                    },
+                    "idex" : function(){
+                        return idex++;
+                    }
+                 };
+                 
+                     res.header("Access-Control-Allow-Origin", "*");
+                     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+           
+                    console.log("In client activity data"+data);
+                   res.send(data);
+
+             })
+             
+             
+
+        };
+
+
+
+
 
 
 
@@ -434,6 +503,74 @@ self.routes['/sendMail'] = function(req, res) {
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
         }
+
+       self.app.post('/saveData',jsonParser, function(req, res) {
+                  var name = req.body.image;
+                  var client=req.body.client;
+                  var date=req.body.date;
+                    console.log("in save data request"+name+">>>>>>"+client+">>>>"+date);
+                   // res.end("yes");
+
+                    ///res.json({yo: hello});
+                     //var data = {"clients" : "Hello"};
+                 
+                // res.header("Access-Control-Allow-Origin", "*");
+                 //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+           
+
+                console.log("Saving signature for client ID >>>>>>>>>>>>>>>>>>>>>"+client._id);
+                    var collection = database.collection('client');
+
+                    //var temp =collection.find({"_id": "5828c7a9fd78e2ce3d000011"});
+
+                   //console.log("Variable temp >>>>>>>>>>>>"+temp.firstname);
+
+console.log("First name"+client.firstname+">>>>>>>>>>>>>"+"lastname"+client.lastname);
+
+//collection.update({_id:client._id},
+                    collection.update({"lastname":client.lastname,"firstname":client.firstname},
+                     {
+                        $addToSet: {
+                            "Activity":
+
+                                {
+                                 "signature":name,
+                                 "date":date
+                                }
+                              },
+
+                               "$set": { 
+                               "lastvisit": date
+                           
+                            }
+
+                    }, 
+                    function(err,result)
+                    {
+
+
+                     console.log("error+"+err);
+                        console.log("result+"+result);
+                        if (err) 
+                        {
+                         // Oh no! Something goes wrong!
+                            return;
+                         }
+                
+
+                                      
+
+
+
+                     }); 
+
+
+
+
+                   res.send("yes");
+              
+            // ...
+            });
     };
 
 
@@ -447,6 +584,9 @@ self.routes['/sendMail'] = function(req, res) {
 		self.mongoConnect();
         // Create the express server and routes.
         self.initializeServer();
+              // to support JSON-encoded bodies
+
+
     };
 	
 	
@@ -490,16 +630,23 @@ self.routes['/sendMail'] = function(req, res) {
         self.app.listen(self.port, self.ipaddress, function() {
             console.log('%s: Node server started on %s:%d ...',
                         Date(Date.now() ), self.ipaddress, self.port);
+            self.app.use( bodyParser.json() ); 
+            self.app.use(bodyParser.urlencoded({ extended: false }))
+ 
+ /*
+self.app.use(function (req, res) {
+  res.setHeader('Content-Type', 'text/plain')
+  res.write('you posted:\n')
+  res.end(JSON.stringify(req.body, null, 2))
+})
+self.app.use(bodyParser.json({ type: 'application/*+json' }))
+*/
+
+
         });
     };
 
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-    
 
 };   /*  Sample Application.  */
 

@@ -1,0 +1,8 @@
+No OPENSHIFT_NODEJS_IP var, using 127.0.0.1
+Warning: express.createServer() is deprecated, express
+applications no longer inherit from http.Server,
+please use:
+
+  var express = require("express");
+  var app = express();
+

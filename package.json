@@ -23,6 +23,7 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
+    "body-parser": "^1.17.1",
     "express": "~3.4.4",
     "mustache": "^2.2.1"
   },
