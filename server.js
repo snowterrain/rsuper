@@ -514,8 +514,8 @@ self.routes['/sendMail'] = function(req, res) {
                     ///res.json({yo: hello});
                      //var data = {"clients" : "Hello"};
                  
-                // res.header("Access-Control-Allow-Origin", "*");
-                 //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+                res.header("Access-Control-Allow-Origin", "*");
+                res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
            
 
                 console.log("Saving signature for client ID >>>>>>>>>>>>>>>>>>>>>"+client._id);
