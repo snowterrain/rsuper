@@ -50,6 +50,16 @@
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
 
+
+<script type="text/javascript">
+    var feed = new Instafeed({
+        get: 'tagged',
+        tagName: 'awesome',
+        clientId: 'af805ec713b34484a8e58035b5d0bdce'
+    });
+    feed.run();
+</script>
+
 	</head>
 	<body>
 		<div id="fh5co-wrapper">
@@ -97,6 +107,8 @@
 			
 		</div>
 		</div>
+
+		<div id="instafeed"></div> 
 		<!-- end: fh5co-parallax -->
 		<!-- end:fh5co-hero -->
 		

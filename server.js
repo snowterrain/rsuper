@@ -451,6 +451,8 @@ self.routes['/sendMail'] = function(req, res) {
 				auth: { user: 'contact@the-superfit.com', pass: 'Superman39' },
 					secure: true
 			});
+
+        if(req.query.name && (req.query.phone || req.query.email)){        
 			
 			 var text ="This Message From:   "+req.query.name+' Phone :'+req.query.phone+"      Email:"+req.query.email+"      "+req.query.message;
 			 console.log('hello Name '+req.query.name+' Phone :'+req.query.phone+'  Email'+req.query.email+'Message'+req.query.message);
@@ -484,6 +486,16 @@ self.routes['/sendMail'] = function(req, res) {
 						res.send(html);
 					};
 			});
+
+        } else{
+                        
+                        var data ={
+                        "message":"Please enter Name and contact email/phone"
+                        }
+                        //res.json({yo: info.response});
+                         var html = mustache.to_html(content,data);
+                        res.send(html);
+                    }
 		
         };
 	
