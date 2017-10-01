@@ -620,12 +620,12 @@ console.log("First name"+client.firstname+">>>>>>>>>>>>>"+"lastname"+client.last
             process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
             process.env.OPENSHIFT_APP_NAME;
         }
-		    /*
+		    
         MongoClient.connect("mongodb://"+connection_string, function(err, db) {
             if(!err) {
                  db.authenticate('admin', 'JbLjxjD4NCH7', function(err, result) {
                        database = db;
-                });*/
+                });
 
             }
     });
