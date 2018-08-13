@@ -3,7 +3,7 @@
 var express = require('express');
 var fs      = require('fs');
 var mustache = require('mustache');
-var nodemailer = require('nodemailer');
+//var nodemailer = require('nodemailer');
 var request = require('request');
 var app=express();
 var cheerio = require('cheerio');
@@ -445,15 +445,15 @@ self.routes['/sendMail'] = function(req, res) {
 	    
 	   
 			
-				var transporter = nodemailer.createTransport({ 
+			/* 	var transporter = nodemailer.createTransport({ 
 				host: 'smtpout.secureserver.net', 
 				port: 465, 
 				auth: { user: 'contact@the-superfit.com', pass: 'Superman39' },
 					secure: true
 			});
-
+ */
         if(req.query.name && (req.query.phone || req.query.email)){        
-			
+			/* 
 			 var text ="This Message From:   "+req.query.name+' Phone :'+req.query.phone+"      Email:"+req.query.email+"      "+req.query.message;
 			 console.log('hello Name '+req.query.name+' Phone :'+req.query.phone+'  Email'+req.query.email+'Message'+req.query.message);
 //			 'Hello world from \n\n';
@@ -485,16 +485,25 @@ self.routes['/sendMail'] = function(req, res) {
 						 var html = mustache.to_html(content,data);
 						res.send(html);
 					};
-			});
+            }); */
+            
+            console.log('Message sent: ' + info.response);
+            var data ={
+            "message":"Thank you for getting in touch!. Rashid will get back to you as soon as possible"
+            }
+            //res.json({yo: info.response});
+             var html = mustache.to_html(content,data);
+            res.send(html);
 
-        } else{
+
+        } else{/* 
                         
                         var data ={
                         "message":"Please enter Name and contact email/phone"
                         }
                         //res.json({yo: info.response});
                          var html = mustache.to_html(content,data);
-                        res.send(html);
+                        res.send(html); */
                     }
 		
         };
