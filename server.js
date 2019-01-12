@@ -649,11 +649,13 @@ console.log("First name"+client.firstname+">>>>>>>>>>>>>"+"lastname"+client.last
 		
 			 self.app.use(express.static(__dirname + '/'));
         //  Start the app on the specific interface (and port).
-        self.app.listen(self.port, self.ipaddress, function() {
-            console.log('%s: Node server started on %s:%d ...',
-                        Date(Date.now() ), self.ipaddress, self.port);
-            self.app.use( bodyParser.json() ); 
-            self.app.use(bodyParser.urlencoded({ extended: false }))
+	    
+	     self.app.listen(process.env.PORT || 8080);
+        //self.app.listen(self.port, self.ipaddress, function() {
+            //console.log('%s: Node server started on %s:%d ...',
+            //            Date(Date.now() ), self.ipaddress, self.port);
+           // self.app.use( bodyParser.json() ); 
+           // self.app.use(bodyParser.urlencoded({ extended: false }))
  
  /*
 self.app.use(function (req, res) {
