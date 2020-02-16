@@ -285,9 +285,106 @@ var SampleApp = function() {
 		 self.routes['/trainer-videos'] = function(req, res) {
 			 
 			var params = {};
-		 	var collection = database.collection('trainingyt');
-			var content = fs.readFileSync('views/videos.html').toString();
+		 //	var collection = database.collection('trainingyt');
+            var content = fs.readFileSync('views/videos.html').toString();
+            
+            var data={
+                "videos":[{
+                    "name": "Kettlebell swing",
+                    "youtubeid": "khKaFtL_hr8"
+                },
+                {
+                    "name": "Med ball ball slam",
+                    "youtubeid": "Lm8rdZF-y8A"
+                },
+                {
+                    "name": "battling rope side to side",
+                    "youtubeid": "i_KlcB2iv_M"
+                },
+                {
+                    "name": "TRX suspension system",
+                    "youtubeid": "JChZ4kAkD-8"
+                },
+                {
+                    "name": "Box jumps",
+                    "youtubeid": "gRsmpWwakzY"
+                },
+                {
+                    "name": "dumbbell thruster",
+                    "youtubeid": "4VAtzkxWHE0"
+                },
+                {
+                    "name": "Battling rope for the core",
+                    "youtubeid": "mcOqPl2W-xA"
+                },
+                {
+                    "name": "Inchworm",
+                    "youtubeid": "AfgmkRCs90c"
+                },
+                {
+                    "name": "Straight barbell thruster",
+                    "youtubeid": "zogTZ7MsDYM"
+                },
+                {
+                    "name": "Concept 2 skier",
+                    "youtubeid": "Zvvp0URUDh8"
+                },
+                {
+                    "name": "Renegade row 30 pound dumbbells",
+                    "youtubeid": "TSx1RsdJzTc"
+                },
+                {
+                    "name": "Battling rope push-up combo",
+                    "youtubeid": "Wlii3KNvsMo"
+                },
+                {
+                    "name": "Turkish get-ups",
+                    "youtubeid": "0oohQLwh8C8"
+                },
+                {
+                    "name": "Sledgehammer  hits",
+                    "youtubeid": "BbnwZXV_GZI"
+                },
+                {
+                    "name": "Battling ropes",
+                    "youtubeid": "Q3kguQWhEEw"
+                },
+                {
+                    "name": "Russian Twist on Swiss ball",
+                    "youtubeid": "QgxBzlGumLc"
+                },
+                {
+                    "name": "Wall balls",
+                    "youtubeid": "iq_M07O3xsQ"
+                },
+                {
+                    "name": "Dual kettlebell High pull",
+                    "youtubeid": "lWlrSP3q8bM"
+                },
+                {
+                    "name": "Addressing hamstrings",
+                    "youtubeid": "--WDjgRApPE"
+                },
+                {
+                    "name": "Power board for lower body",
+                    "youtubeid": "RRo3MHOrqwg"
+                },
+                {
+                    "name": "Feb 8 Training By Rashid Chaudry",
+                    "youtubeid": "x1ANb4kwcLs"
+                },
+                {
+                    "name": "Training by Rashid Chaudry",
+                    "youtubeid": "K5CoybYpTXU"
+                },
+                {
+                    "name": "Kettlebell swings BY Rashid Chaudry",
+                    "youtubeid": "CEtvaevx5oY"
+                }
+            ]
 
+            };
+/* 
 			collection.find(params).sort({"_id":-1}).toArray(function(err, docs) {
                var idx = 0;
                 var idex = 0;
@@ -300,7 +397,7 @@ var SampleApp = function() {
                         return idex++;
                     }
                  };
-				 
+				  */
 				 
 			  var html = mustache.to_html(content,data);
                    if(req.headers.type && req.headers.type == 'JSON'){
@@ -308,7 +405,7 @@ var SampleApp = function() {
                    }
                    res.send(html);
 
-             })
+            // })
         };
 		
 	 self.routes['/review'] = function(req, res) {
@@ -364,7 +461,7 @@ var SampleApp = function() {
         try{
 
           //for(var i=0;i<configModule.getChannels().length;i++){
-            var collection = database.collection('trainingyt');
+           // var collection = database.collection('trainingyt');
               request('https://www.youtube.com/channel/UCG7vl3IncjRSiLkhxtkB_4g/videos?shelf_id=0&view=0&sort=dd', function (error, response, html) {
 				  
 
@@ -382,13 +479,15 @@ var SampleApp = function() {
                         //youtubeid=youtubeid.substring(0,youtubeid.lastIndexOf("&index"));
                         //linkContent = linkContent+ $(link).text() + ':' + youtubeid+ '<br>';
 						
-						 console.log("youtube id"+youtubeid);
+						 //console.log("youtube id"+youtubeid);
                         if(youtubeid && text){
                           var document = {'name':text.replace('\n',''), 'youtubeid':youtubeid};
-                          collection.insert(document, {w:1}, function(err, result) {});
+
+                          console.log('name:'+text.replace('\n','')+',youtubeid:'+youtubeid)
+                         // collection.insert(document, {w:1}, function(err, result) {});
                         }
                       }
-                       console.log($(link).text() + ':\n  ' + $(link).attr('href'));
+                      // console.log($(link).text() + ':\n  ' + $(link).attr('href'));
                      });
 
 
