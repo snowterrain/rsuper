@@ -23,9 +23,9 @@
     "npm": ">= 1.0.0"
   },
   "dependencies": {
-    "body-parser": "^1.17.1",
+    "body-parser": "^1.20.1",
     "cheerio": "^1.0.0-rc.2",
-    "express": "~3.4.4",
+    "express": "~3.21.2",
     "mongodb": "^3.1.1",
     "mustache": "^2.2.1",
     "request": "^2.87.0"
